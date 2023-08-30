@@ -7,19 +7,6 @@ const {
 
 const args = process.argv.slice(2);
 
-// List handler
-
-if (args[0] === "list") {
-  if (args.length > 1) {
-    console.log("this function cannot take any parameter");
-    return;
-  } else {
-    listNotes();
-  }
-}
-
-// // Add handler
-
 const flags = {
   title: null,
   body: null,
@@ -40,98 +27,61 @@ const extractFlagsValue = (args) => {
   });
 };
 
-if (args[0] === "add") {
-  extractFlagsValue(args);
-  if (flags.title === null || flags.body === null) {
-    console.log(
-      "Both --title and --body flags must be specified to add a note."
-    );
-  } else {
-    const { title, body } = flags;
-    insertNote(title, body);
+const listHandler = () => {
+  if (args[0] === "list") {
+    if (args.length > 1) {
+      console.log("this function cannot take any parameter");
+      return;
+    } else {
+      listNotes();
+    }
   }
-}
+};
 
-if (args[0] === "remove") {
-  extractFlagsValue(args);
-  if (flags.title === null) {
-    console.log("The --title flag must be specified to remove a note.");
-  } else {
-    const { title } = flags;
-    deleteNote(title);
+const addHandler = () => {
+  if (args[0] === "add") {
+    extractFlagsValue(args);
+    if (flags.title === null || flags.body === null) {
+      console.log(
+        "Both --title and --body flags must be specified to add a note."
+      );
+    } else {
+      const { title, body } = flags;
+      insertNote(title, body);
+    }
   }
-}
+};
 
-if (args[0] === "read") {
-  extractFlagsValue(args);
-  if (flags.title === null) {
-    console.log("The --title flag must be specified to read a note.");
-  } else {
-    const { title } = flags;
-    readNote(title);
+const removehandler = () => {
+  if (args[0] === "remove") {
+    extractFlagsValue(args);
+    if (flags.title === null) {
+      console.log("The --title flag must be specified to remove a note.");
+    } else {
+      const { title } = flags;
+      deleteNote(title);
+    }
   }
-}
+};
 
-// HANDLE FUNCTIONS USING YARGS
+const readHandler = () => {
+  if (args[0] === "read") {
+    extractFlagsValue(args);
+    if (flags.title === null) {
+      console.log("The --title flag must be specified to read a note.");
+    } else {
+      const { title } = flags;
+      readNote(title);
+    }
+  }
+};
 
-// *
-// *
-// *
-// *
-// *
-// *
-// *
-// *
-// *
-// *
-// *
-
-// const yargs = require("yargs");
-
-// // Handling Input Using yargs.
-
-// yargs
-//   .command({
-//     command: "add",
-//     describe: "Add a new note",
-//     builder: {
-//       title: {
-//         describe: "Note title",
-//         demandOption: true,
-//         type: "string",
-//       },
-//       body: {
-//         describe: "Note body",
-//         demandOption: true,
-//         type: "string",
-//       },
-//     },
-//     handler: (argv) => {
-//       insertNote(argv.title, argv.body);
-//     },
-//   })
-//   .command({
-//     command: "list",
-//     describe: "List all notes",
-//     handler: () => {
-//       listNotes();
-//     },
-//   })
-//   .command({
-//     command: "read",
-//     describe: "Find a note by its title",
-//     handler: (argv) => {
-//       readNote(argv.title);
-//     },
-//   })
-//   .command({
-//     command: "remove",
-//     describe: "Remove a note by its title",
-//     handler: (argv) => {
-//       deleteNote(argv.title);
-//     },
-//   })
-//   .demandCommand()
-//   .help().argv;
-
-// yargs.parse();
+args[0] === "read"
+  ? readHandler()
+  : args[0] === "remove"
+  ? removehandler()
+  : args[0] === "list"
+  ? listHandler()
+  : args[0] === "add"
+  ? addHandler()
+  : console.log("That is not a valid operation");
