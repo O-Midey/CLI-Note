@@ -81,10 +81,4 @@ node main.js remove --title="Note Title"
 
 If you'd like to contribute to this project or report issues, please open an issue or create a pull request on the project's GitHub repository: [https://github.com/yourusername/note-taking-app](https://github.com/yourusername/note-taking-app).
 
-## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-Feel free to customize this README to suit your specific project details. It provides users with clear instructions on how to set up and use your note-taking application.
