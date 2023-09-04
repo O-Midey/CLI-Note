@@ -1,7 +1,3 @@
-Certainly! Here's a template for a README file for your note-taking application:
-
----
-
 # Note-Taking App
 
 This is a simple command-line note-taking application built with Node.js. It allows you to add, list, read, and remove notes from a text file. This README will guide you through setting up and using the app.
